@@ -5,17 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameOfLife"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        Title="Conway's Game Of Life" Height="800" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid Background="LightGray">
         <Canvas Margin="33,10,33,133">
             <Grid x:Name ="Area" Height="650" Width="650" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="146">
 
             </Grid>
-            <Button HorizontalAlignment="Center" Height="59" Canvas.Left="10" Canvas.Top="321" VerticalAlignment="Top" Width="123" Click="Button_Click" Background="#FF08FF00" Content="START" FontSize="36"/>
+            <Button HorizontalAlignment="Left" Height="59" Canvas.Left="-10" Canvas.Top="321" VerticalAlignment="Center" Width="123" Click="Button_Click" Background="#FF08FF00" Content="START" FontSize="36"/>
             <TextBlock HorizontalAlignment="Center" Height="71" VerticalAlignment="Center" Width="752" Canvas.Left="95" Canvas.Top="655" Text="Conway's Game Of Life Simulator" FontSize="48" TextAlignment="Center"></TextBlock>
             <TextBlock Height="53" Width="144" Canvas.Top="282" Text="Current Generation:" FontSize="18" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Canvas.Left="801"/>
             <TextBlock Height="26" Width="752" Canvas.Left="95" Canvas.Top="717" Text="(limited to a 100x100 grid)" FontSize="16" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBlock x:Name="Generation" Height="52" Width="144" Canvas.Top="335" Text="8" FontSize="36" TextAlignment="Center" Canvas.Left="801" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBlock x:Name="Generation" Height="52" Width="144" Canvas.Top="335" Text="NaN" FontSize="36" TextAlignment="Center" Canvas.Left="801" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>
 </Window>

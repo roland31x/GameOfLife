@@ -23,6 +23,7 @@ namespace GameOfLife
         List<TextBlock> buttons = new List<TextBlock>();
         TextBlock currentHover;
         bool canhover = true;
+        bool isdead = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -121,18 +122,32 @@ namespace GameOfLife
                 pressed.Content = "START";
                 pressed.Background = new SolidColorBrush(Colors.LimeGreen);
             }
-            CheckButton();
+            CheckButton(sender);
         }
-        async private void CheckButton()
+        async private void CheckButton(object sender)
         {
             int gen = 0;
+            Button pressed = sender as Button;
             while (!canhover)
             {
-                Generation.Text = gen.ToString();
+                
                 Play();
                 gen++;
+                Generation.Text = gen.ToString();
+                if (isdead)
+                {
+                    gen--;
+                    Generation.Text = gen.ToString();
+                    isdead = false;
+                    canhover = true;
+                    pressed.Content = "START";
+                    pressed.Background = new SolidColorBrush(Colors.LimeGreen);
+                    return;
+                }
                 await Task.Delay(500);
+                
             }
+           
         }
         private void Play()
         {
@@ -154,6 +169,11 @@ namespace GameOfLife
                     NowAlive.Add(buttons[i]);
                     NowAlivePos.Add(i);
                 }
+            }
+            if(NowAlive.Count == 0)
+            {
+                isdead = true;
+                return;
             }
             for(int i = 0; i < NowAlive.Count; i++)
             {
