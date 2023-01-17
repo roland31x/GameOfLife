@@ -13,5 +13,6 @@ namespace GameOfLife
     /// </summary>
     public partial class App : Application
     {
+        public static int Size = 16;
     }
 }

@@ -24,34 +24,36 @@ namespace GameOfLife
         TextBlock currentHover;
         bool canhover = true;
         bool isdead = false;
+        int Size = App.Size;
         public MainWindow()
         {
             InitializeComponent();
+            AreaSetter.Text = Size.ToString();
             MouseDown += A_MousePress;
             Draw();
         }
         public void Draw()
         {
             Area.Background = new SolidColorBrush(Colors.Black);
-            for(int i = 0; i < 100; i++)
+            for(int i = 0; i < Size; i++)
             {
                 ColumnDefinition f = new ColumnDefinition();
-                f.Width = new GridLength((Area.Width) / 100);
+                f.Width = new GridLength((Area.Width) / Size);
                 Area.ColumnDefinitions.Add(f);
                 RowDefinition r = new RowDefinition();
-                r.Height = new GridLength((Area.Height) / 100);
+                r.Height = new GridLength((Area.Height) / Size);
                 Area.RowDefinitions.Add(r);
             }
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < Size; i++)
             {
-                for (int j = 0; j < 100; j++)
+                for (int j = 0; j < Size; j++)
                 {
                     TextBlock t = new TextBlock
                     {
-                        Width = (Area.Width) / 100,
+                        Width = (Area.Width) / Size,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center,
-                        Height = (Area.Width) / 100,
+                        Height = (Area.Width) / Size,
                         Background = new SolidColorBrush(Colors.Black),
 
                         Tag = "0",
@@ -161,7 +163,7 @@ namespace GameOfLife
 
             List<TextBlock> NewAlive = new List<TextBlock>();
 
-            SortedSet<int> neighbors = new SortedSet<int> {1,-1,101, 100, 99, -101, -100, -99 };
+            SortedSet<int> neighbors = new SortedSet<int> {1,-1, Size + 1, Size - 1, 1 - Size, - 1 - Size , Size, -Size };
             for(int i = 0; i < buttons.Count; i++)
             {
                 if (Convert.ToInt32(buttons[i].Tag.ToString()) == 1)
@@ -178,17 +180,17 @@ namespace GameOfLife
             for(int i = 0; i < NowAlive.Count; i++)
             {
                 int neighborsalive = 0;
-                if (NowAlivePos[i] % 100 == 0)
+                if (NowAlivePos[i] % Size == 0)
                 {
-                    neighbors.Remove(-101);
+                    neighbors.Remove(-1 - Size);
                     neighbors.Remove(-1);
-                    neighbors.Remove(99);
+                    neighbors.Remove(-1 + Size);
                 }
-                if ((NowAlivePos[i] - 99) % 100 == 0)
+                if ((NowAlivePos[i] - (Size - 1)) % Size == 0)
                 {
-                    neighbors.Remove(-99);
+                    neighbors.Remove(1 - Size);
                     neighbors.Remove(1);
-                    neighbors.Remove(101);
+                    neighbors.Remove(1 + Size);
                 }
                 foreach (int m in neighbors)
                 {
@@ -226,15 +228,15 @@ namespace GameOfLife
 
                 if (CheckDeadPos[i] % 100 == 0)
                 {
-                    neighbors.Remove(-101);
+                    neighbors.Remove(-1 - Size);
                     neighbors.Remove(-1);
-                    neighbors.Remove(99);
+                    neighbors.Remove(-1 + Size);
                 }
                 if ((CheckDeadPos[i] - 99) % 100 == 0)
                 {
-                    neighbors.Remove(-99);
+                    neighbors.Remove(1 - Size);
                     neighbors.Remove(1);
-                    neighbors.Remove(101);
+                    neighbors.Remove(1 + Size);
                 }
 
                 foreach (int m in neighbors)
@@ -270,12 +272,40 @@ namespace GameOfLife
         }
         public void ResNeighbors(SortedSet<int> n)
         {
-            n.Add(-99);
-            n.Add(1);
-            n.Add(101);
-            n.Add(-101);
+            n.Add(-1 - Size);
             n.Add(-1);
-            n.Add(99);
+            n.Add(-1 + Size);
+            n.Add(1 - Size);
+            n.Add(1);
+            n.Add(1 + Size);
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(uint.TryParse((sender as TextBox).Text, out uint res))
+            { 
+                if(res == Size)
+                {
+                    SetButton.IsEnabled = false;
+                    return;
+                }
+                else
+                {
+                    SetButton.IsEnabled = true;
+                }
+            }
+            else
+            {
+                SetButton.IsEnabled = false;
+            }
+        }
+
+        private void SetButton_Click(object sender, RoutedEventArgs e)
+        {
+            App.Size = int.Parse(AreaSetter.Text);
+            MainWindow newWindow = new MainWindow();
+            newWindow.Show();
+            this.Close();
         }
     }
 }
