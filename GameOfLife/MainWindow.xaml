@@ -16,8 +16,8 @@
             <TextBlock Height="53" Width="144" Canvas.Top="282" Text="Current Generation:" FontSize="18" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top" TextWrapping="Wrap" Canvas.Left="801"/>
             <TextBlock Height="26" Width="752" Canvas.Left="95" Canvas.Top="717" Text="(limited to a finite grid)" FontSize="16" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <TextBlock x:Name="Generation" Height="52" Width="144" Canvas.Top="335" Text="NaN" FontSize="36" TextAlignment="Center" Canvas.Left="801" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBlock Height="25" Width="144" Canvas.Top="10" Text="Area Size:" FontSize="18" TextAlignment="Center" TextWrapping="Wrap" Canvas.Left="801" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <TextBox x:Name ="AreaSetter" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="106" Canvas.Left="820" Canvas.Top="40" RenderTransformOrigin="0.5,0.5" TextChanged="TextBox_TextChanged" TextAlignment="Center" FontSize="24">
+            <TextBlock Height="25" Width="144" Canvas.Top="103" Text="Area Size:" FontSize="18" TextAlignment="Center" TextWrapping="Wrap" Canvas.Left="-20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <TextBox x:Name ="AreaSetter" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="106" Canvas.Left="-2" Canvas.Top="133" RenderTransformOrigin="0.5,0.5" TextChanged="TextBox_TextChanged" TextAlignment="Center" FontSize="24">
                 <TextBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="1"/>
@@ -27,7 +27,7 @@
                     </TransformGroup>
                 </TextBox.RenderTransform>
             </TextBox>
-            <Button x:Name="SetButton" Height="28" Canvas.Left="833" Canvas.Top="80" Width="80" Click="SetButton_Click" Background="#FF08FF00" Content="SET" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button x:Name="SetButton" Height="28" Canvas.Left="12" Canvas.Top="173" Width="80" Click="SetButton_Click" Background="#FFD5FF00" Content="SET" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>
 </Window>
